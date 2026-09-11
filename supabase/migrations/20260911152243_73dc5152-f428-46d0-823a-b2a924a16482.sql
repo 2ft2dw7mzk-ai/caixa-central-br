@@ -1,0 +1,1 @@
+alter function public.seed_user_defaults() security invoker;
