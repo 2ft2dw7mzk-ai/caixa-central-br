@@ -3,7 +3,19 @@ import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import type { Entry } from "./finance";
 
-async function listar<T>(tabela: string, ordem = "nome") {
+type TabelaNome =
+  | "categories"
+  | "subcategories"
+  | "accounts"
+  | "cards"
+  | "projects"
+  | "fixed_bills"
+  | "invoices"
+  | "card_purchases"
+  | "entries"
+  | "incomes";
+
+async function listar<T>(tabela: TabelaNome, ordem = "nome") {
   const { data, error } = await supabase.from(tabela).select("*").order(ordem);
   if (error) throw error;
   return (data ?? []) as T[];

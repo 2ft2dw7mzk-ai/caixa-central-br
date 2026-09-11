@@ -167,7 +167,10 @@ type Card = {
 
 /** Em qual fatura cai uma compra feita nesta data. */
 export function faturaDaCompra(card: Card, dataCompra: string) {
-  const [ano, mes, dia] = dataCompra.slice(0, 10).split("-").map(Number);
+  const partes = dataCompra.slice(0, 10).split("-").map(Number);
+  const ano = partes[0] ?? 0;
+  const mes = partes[1] ?? 1;
+  const dia = partes[2] ?? 1;
   const desloca = dia > card.dia_fechamento ? 1 : 0;
   return somarMeses(mes, ano, desloca);
 }
